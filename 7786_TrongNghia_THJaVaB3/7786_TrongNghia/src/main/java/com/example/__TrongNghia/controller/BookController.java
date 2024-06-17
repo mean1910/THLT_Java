@@ -42,6 +42,25 @@ public class BookController {
         return "redirect:/books";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editBookForm(@PathVariable("id") long id, Model model)
+    {
+        Book editbook = bookService.getBookById(id);
+        if(editbook != null)
+        {
+            model.addAttribute("book",editbook);
+            model.addAttribute("categories", categoryService.getAllCategories());
+            return "book/edit";
+        }else{
+            return "not-found";
+        }
+    }
+    @PostMapping("/edit")
+    public String editBook(@ModelAttribute("book") Book updatebook){
+        bookService.updateBook(updatebook);
+        return "redirect:/books";
+    }
+
     @GetMapping("/delete/{id}")
     public String deleteBook(@PathVariable("id") long id){
         bookService.deleteBook(id);

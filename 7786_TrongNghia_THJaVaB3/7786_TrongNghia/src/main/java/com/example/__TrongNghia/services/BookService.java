@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class BookService {
-    @Autowired
+        @Autowired
     private IBookRepository bookRepository;
     public List<Book> getAllBook(){
         return bookRepository.findAll();
